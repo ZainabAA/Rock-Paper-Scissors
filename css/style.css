@@ -51,6 +51,10 @@ header{
     text-align: center;
 }
 
+.player-choice:hover img, .player-choice:focus img{
+    box-shadow: 5px 5px 50px 15px rgb(138, 138, 138);
+}
+
 img{
     width: 50%;
     height: 50%;
@@ -89,4 +93,16 @@ img{
 
     text-align: center;
     font-size: var(--font-s-regular);
+}
+.result h2, .result h3{
+    font-weight: var(--font-w-bold);
+}
+
+.dynamic-text, .dynamic-result-player, .dynamic-result-computer{
+    color: rgb(92, 125, 225);
+}
+
+.result-display {
+    display: grid;
+    grid-template-columns: auto auto;
 }
