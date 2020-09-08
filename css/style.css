@@ -1,18 +1,21 @@
 :root{
     --font-f: 'Amatic SC', cursive;
-    --font-w-bold: 700;
-    --font-s-title: 10vw;
-    --font-s-regular: 5vw;
+    --font-w-bold: 400;
+    --font-s-title: 5vw;
+    --font-s-regular: 2.5vw;
+
+    --hand-rotation: 0deg;
 }
 
 body{
+    background-color: #00a39b;
     height: 100vh;
-    width: 100vw;
+    /* width: 100vw; */
     font-family: var(--font-f);
     margin: 0;
 
     display: grid;
-    grid-template-columns: 30% auto auto;
+    grid-template-columns: 30% auto;
     grid-template-areas: 'sidebar header'
                          'sidebar hands'
                          'sidebar result';
@@ -20,6 +23,7 @@ body{
 
 header{
     grid-area: header;
+
     text-align: center;
     font-weight: var(--font-w-bold);
     font-size: var(--font-s-title);
@@ -39,6 +43,7 @@ header{
     grid-template-rows: repeat(3, auto);
     box-sizing: border-box;
     justify-content: center;
+
     /* margin-left: -20%;
 
     width: 45%; */
@@ -75,8 +80,8 @@ img{
 
 @media(min-width: 400px){
     .hand-display-right, .hand-display-left{
-        width: 30vw;
-        height: 30vw;
+        width: 15vmax;
+        height: 25vmax;
     }
 }
 
@@ -84,9 +89,50 @@ img{
     transform: scaleX(-1);
     flex: 1;
 }
+
 .hand-display-left{
     flex: 1;
 }
+
+
+.left-anim{
+    animation:
+    shake 0.7s 0s 3 ease forwards;
+}
+
+.right-anim{
+    transform: scaleX(-1);
+    animation:
+     computer-shake 0.7s 0s 3 ease forwards;
+
+}
+@keyframes shake{
+    0%{
+        transform: rotate(0deg);
+    }
+    45%{
+        transform: rotate(45deg);
+    }
+
+    100%{
+        transform: rotate(0deg);
+    }
+}
+@keyframes computer-shake{
+    0%{
+        transform: rotate(0deg) scaleX(-1);
+    }
+    50%{
+        transform: rotate(-45deg) scaleX(-1);
+    }
+    100%{
+        transform: rotate(0deg) scaleX(-1);
+    }
+}
+
+
+
+
 
 .result{
     grid-area: result;
@@ -99,7 +145,7 @@ img{
 }
 
 .dynamic-text, .dynamic-result-player, .dynamic-result-computer{
-    color: rgb(92, 125, 225);
+    color: white
 }
 
 .result-display {

@@ -1,4 +1,21 @@
-const  OPTIONS = ['rock', 'paper', 'scissors']
+const  OPTIONS = ['rock', 'paper', 'scissors'];
+
+
+let trackComputer = 0;
+let trackPlayer = 0;
+let trackRound = 1;
+
+let leftHand = document.querySelectorAll('.hand-display-left').item(0);
+let rightHand = document.querySelectorAll('.hand-display-right').item(0);
+
+let choices = document.querySelectorAll('.player-choice');
+let playerResult = document.querySelector('.dynamic-result-player');
+let computerResult = document.querySelector('.dynamic-result-computer');
+
+
+playerResult.textContent = ''+trackPlayer;
+computerResult.textContent = ''+trackComputer;
+
 function computerPlay(){
     let i = Math.floor(Math.random() * 4);
     return OPTIONS[i];
@@ -6,6 +23,8 @@ function computerPlay(){
 
 function round(playerSelection, computerSelection){
     playerSelection = playerSelection.toLowerCase();
+    trackRound++;
+
     switch (playerSelection){
         case 'rock':
             if(computerSelection == 'paper'){
@@ -54,25 +73,34 @@ function round(playerSelection, computerSelection){
 function game(player){
     computer = computerPlay();
     document.querySelector('.dynamic-text').textContent=round(player, computer);
-    
+
+    document.querySelector('.hand-display-left').setAttribute('src', `img/${player}-left.png`);
+    if(player == 'scissors'){
+        leftHand.style.transform = 'scaleX(-1)';
+    }
+    else{
+        leftHand.style.transform = 'scaleX(1)';
+    }
     playerResult.textContent = ''+trackPlayer;
     computerResult.textContent = ''+trackComputer;
 
+    leftHand.classList.remove('left-anim');
+    rightHand.classList.remove('right-anim');
+
 }
 
-let trackComputer = 0;
-let trackPlayer = 0;
+function handAnimate(){
+    document.querySelector('.hand-display-left').setAttribute('src', `img/rock-left.png`);
+    document.querySelector('.hand-display-right').setAttribute('src', `img/rock-left.png`);
 
-let choices = document.querySelectorAll('.player-choice');
-let playerResult = document.querySelector('.dynamic-result-player');
-let computerResult = document.querySelector('.dynamic-result-computer');
-
-playerResult.textContent = ''+trackPlayer;
-computerResult.textContent = ''+trackComputer;
+    leftHand.classList.toggle('left-anim');
+    rightHand.classList.toggle('right-anim');
+}
 
 choices.forEach(choice => {
     choice.addEventListener('click', ()=>{
-        
-        game(choice.classList[1]);
+        document.querySelector('.round').textContent = 'Round '+trackRound;
+        setTimeout(()=>{game(choice.classList[1])}, 2000);
+        handAnimate();
     })
 })
